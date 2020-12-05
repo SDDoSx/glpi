@@ -218,10 +218,6 @@ $break_tablets: 1300px;
    }
 
    a {
-     &:hover {
-        color: black;
-     }
-
      &.target-deleted {
         text-decoration: line-through;
      }
@@ -1372,10 +1368,6 @@ $break_tablets: 1300px;
    .navigationheader {
       padding: 7px 10px;
       display: flex;
-
-      & > * {
-         margin: 0 5px;
-      }
 
       .navicon {
          margin-top: 5px;
