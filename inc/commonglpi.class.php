@@ -971,7 +971,7 @@ class CommonGLPI {
             }
          }
          $cleantarget = Html::cleanParametersURL($target);
-         echo "<div class='navigationheader border-bottom'>";
+         echo "<div class='navigationheader'>";
 
          if ($first >= 0) {
             echo "<a href='$cleantarget?id=$first$extraparamhtml'
@@ -1222,8 +1222,7 @@ class CommonGLPI {
          $options += $_REQUEST['tab_params'];
       }
 
-      echo "<div class='container-fluid card'>";
-      echo "<div class='row'>";
+      echo "<div class='container-fluid flex-column'>";
       $this->showNavigationHeader($options);
       if (!self::isLayoutExcludedPage() && self::isLayoutWithMain()) {
 
@@ -1233,10 +1232,7 @@ class CommonGLPI {
          $this->showPrimaryForm($options);
       }
 
-      echo "</div>";
-      echo "<div class='row'>";
       $this->showTabsContent($options);
-      echo "</div>";
       echo "</div>";
    }
 
