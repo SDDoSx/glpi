@@ -4463,7 +4463,7 @@ abstract class CommonITILObject extends CommonDBTM {
       }
 
       // Manage actors
-      echo "<div class='tab_actors tab_cadre_fixe m-2' id='mainformtable5'>";
+      echo "<div class='tab_actors tab_cadre_fixe' id='mainformtable5'>";
       echo "<div class='responsive_hidden actor_title'>".__('Actor')."</div>";
 
       // ====== Requesters BLOC ======
@@ -7484,7 +7484,7 @@ abstract class CommonITILObject extends CommonDBTM {
       }
       echo "<div class='spaced' id='tabsbody'>";
 
-      echo "<table class='tab_cadre_fixe m-2' id='mainformtable'>";
+      echo "<table class='tab_cadre_fixe' id='mainformtable'>";
 
       // Optional line
       $ismultientities = Session::isMultiEntitiesMode();
