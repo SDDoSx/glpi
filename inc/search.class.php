@@ -1534,7 +1534,7 @@ class Search {
          Session::initNavigateListItems($data['itemtype']);
       }
 
-      TemplateRenderer::getInstance()->display('layout/parts/search/page.html.twig', [
+      TemplateRenderer::getInstance()->display('layout/parts/search/display_data.html.twig', [
          'data'                => $data,
          'union_search_type'   => $CFG_GLPI["union_search_type"],
          'rand'                => mt_rand(),
@@ -2093,21 +2093,15 @@ class Search {
          $p[$key] = $val;
       }
 
-      TemplateRenderer::getInstance()->display('layout/parts/search/form.html.twig', [
-         'itemtype'   => $itemtype,
-         'target'     => $p['target'],
-         'is_deleted' => $p['is_deleted'],
-         'as_map'     => $p['as_map'],
-      ]);
-
-      return;
-
       $main_block_class = '';
+      $card_class = 'mb-2';
       if ($p['mainform']) {
          echo "<form name='searchform$itemtype' method='get' action='".$p['target']."'>";
       } else {
          $main_block_class = "sub_criteria";
+         $card_class = 'border-top-0 border-bottom-0 my-n2 ml-2 px-0';
       }
+      echo "<div class='card card-sm $card_class'>";
       echo "<div id='searchcriteria' class='$main_block_class'>";
       $nbsearchcountvar      = 'nbcriteria'.strtolower($itemtype).mt_rand();
       $searchcriteriatableid = 'criteriatable'.strtolower($itemtype).mt_rand();
@@ -2116,7 +2110,7 @@ class Search {
          var $nbsearchcountvar = ".count($p['criteria']).";
       ");
 
-      echo "<ul id='$searchcriteriatableid'>";
+      echo "<div class='list list-row list-hoverable' id='$searchcriteriatableid'>";
 
       // Display normal search parameters
       $i = 0;
@@ -2129,12 +2123,11 @@ class Search {
       }
 
       $rand_criteria = mt_rand();
-      echo "<li id='more-criteria$rand_criteria'
-            class='normalcriteria headerRow'
-            style='display: none;'>...</li>";
+      echo "<div id='more-criteria$rand_criteria'
+            class='normalcriteria list-item'
+            style='display: none;'>...</div>";
 
-      echo "</ul>";
-      echo "<div class='search_actions'>";
+      echo "</div>"; // .list
 
       // Keep track of the current savedsearches on reload
       if (isset($_GET['savedsearches_id'])) {
@@ -2144,26 +2137,27 @@ class Search {
          ]);
       }
 
+      echo "<div class='card-footer d-flex search_actions'>";
       $linked = self::getMetaItemtypeAvailable($itemtype);
-      echo "<span id='addsearchcriteria$rand_criteria' class='secondary'>
+      echo "<button id='addsearchcriteria$rand_criteria' class='btn btn-sm btn-outline-secondary'>
                <i class='fas fa-plus-square'></i>
                ".__s('rule')."
-            </span>";
+            </button>";
       if (count($linked)) {
-         echo "<span id='addmetasearchcriteria$rand_criteria' class='secondary'>
+         echo "<button id='addmetasearchcriteria$rand_criteria' class='btn btn-sm btn-outline-secondary'>
                   <i class='far fa-plus-square'></i>
                   ".__s('global rule')."
-               </span>";
+               </button>";
       }
-      echo "<span id='addcriteriagroup$rand_criteria' class='secondary'>
+      echo "<button id='addcriteriagroup$rand_criteria' class='btn btn-sm btn-outline-secondary'>
                <i class='fas fa-plus-circle'></i>
                ".__s('group')."
-            </span>";
+            </button>";
       $json_p = json_encode($p);
 
       if ($p['mainform']) {
          // Display submit button
-         echo "<input type='submit' name='".$p['actionname']."' value=\"".$p['actionvalue']."\" class='submit' >";
+         echo "<input type='submit' name='".$p['actionname']."' value=\"".$p['actionvalue']."\" class='btn btn-sm btn-primary' >";
          if ($p['showbookmark'] || $p['showreset']) {
             if ($p['showbookmark']) {
                //TODO: change that!
@@ -2178,17 +2172,17 @@ class Search {
             }
 
             if ($p['showreset']) {
-               echo "<a class='fa fa-undo reset-search' href='"
+               echo "<a class='btn btn-ghost-secondary btn-icon btn-sm' href='"
                   .$p['target']
                   .(strpos($p['target'], '?') ? '&amp;' : '?')
                   ."reset=reset' title=\"".__s('Blank')."\"
-                  ><span class='sr-only'>" . __s('Blank')  ."</span></a>";
+                  ><i class='fas fa-lg fa-undo'></i></a>";
             }
 
             if ($p['showfolding']) {
-               echo "<a class='fa fa-angle-double-up fa-fw fold-search'
+               echo "<a class='btn btn-ghost-secondary btn-icon btn-sm fold-search'
                         href='#'
-                        title=\"".__("Fold search")."\"></a>";
+                        title=\"".__("Fold search")."\"><i class='fas fa-lg fa-angle-double-up'></i></a>";
             }
          }
       }
@@ -2280,7 +2274,8 @@ JAVASCRIPT;
          echo Html::hidden('start', ['value'    => 0]);
       }
 
-      echo "</div>";
+      echo "</div>"; // #searchcriteria
+      echo "</div>"; // .card
       if ($p['mainform']) {
          Html::closeForm();
       }
@@ -2338,7 +2333,7 @@ JAVASCRIPT;
          return self::displayCriteriaGroup($request);
       }
 
-      echo "<li class='normalcriteria$addclass' id='$rowid'>";
+      echo "<div class='list-item normalcriteria$addclass' id='$rowid'>";
 
       if (!isset($request['from_meta'])
           || !$request['from_meta']) {
@@ -2457,7 +2452,7 @@ JAVASCRIPT;
          ] + $params
       );
 
-      echo "</li>";
+      echo "</div>";
    }
 
    /**
@@ -2585,7 +2580,7 @@ JAVASCRIPT;
          ];
       }
 
-      echo "<li class='normalcriteria$addclass' id='$rowid'>";
+      echo "<div class='list-item normalcriteria$addclass' id='$rowid'>";
       echo "<i class='far fa-minus-square remove-search-criteria' alt='-' title=\"".
                __s('Delete a rule')."\" data-rowid='$rowid'></i>&nbsp;";
       Dropdown::showFromArray("criteria{$prefix}[$num][link]", Search::getLogicalOperators(), [
@@ -2603,7 +2598,7 @@ JAVASCRIPT;
       ];
 
       echo self::showGenericSearch($request['itemtype'], $params);
-      echo "</li>";
+      echo "</div>";
    }
 
    /**
