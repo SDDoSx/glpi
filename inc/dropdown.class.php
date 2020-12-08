@@ -1761,7 +1761,7 @@ class Dropdown {
 
       $param['value']               = '';
       $param['values']              = [''];
-      $param['class']               = '';
+      $param['class']               = 'form-select form-select-sm';
       $param['tooltip']             = '';
       $param['option_tooltips']     = [];
       $param['used']                = [];

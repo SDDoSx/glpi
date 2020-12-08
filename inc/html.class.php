@@ -4677,6 +4677,8 @@ JS;
          }
       }
 
+      $options['class'] = 'form-select form-select-sm';
+
       // display select tag
       $output = self::select($name, $values, $options);
 
