@@ -2556,6 +2556,9 @@ JAVASCRIPT;
          'from_meta'       => true,
          'num'             => $num,
          'p'               => $request["p"],
+         '_idor_token'     => Session::getNewIDORToken("", [
+            'parent_itemtype' => $request['itemtype']
+         ])
       ];
       Ajax::updateItemOnSelectEvent(
          $field_id,
