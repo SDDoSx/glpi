@@ -4501,7 +4501,6 @@ JS;
          $('#$id').select2({
             $placeholder
             width: 'auto',
-            theme: 'bootstrap4',
             dropdownAutoWidth: true,
             quietMillis: 100,
             minimumResultsForSearch: ".$CFG_GLPI['ajax_limit_count'].",
@@ -4695,7 +4694,6 @@ JS;
       $js.= "};
 
          $('#$field_id').select2({
-            theme: 'bootstrap4',
             width: 'auto',
             placeholder: '$placeholder',
             allowClear: $allowclear,
