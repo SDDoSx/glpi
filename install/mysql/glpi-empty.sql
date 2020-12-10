@@ -7066,6 +7066,7 @@ CREATE TABLE `glpi_users` (
   `task_state` int(11) DEFAULT NULL,
   `layout` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `palette` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `page_layout` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dark_mode` tinyint(1) DEFAULT NULL,
   `set_default_requester` tinyint(1) DEFAULT NULL,
   `lock_autolock_mode` tinyint(1) DEFAULT NULL,
