@@ -45,6 +45,7 @@ function update95toXX() {
    $migration->displayTitle(sprintf(__('Update to %s'), 'x.x.x'));
    $migration->setVersion('x.x.x');
 
+   require __DIR__ . '/update_95_xx/configs.php';
    require __DIR__ . '/update_95_xx/softwares.php';
    require __DIR__ . '/update_95_xx/domains.php';
    require __DIR__ . '/update_95_xx/devicebattery.php';
