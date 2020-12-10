@@ -1061,7 +1061,7 @@ class CommonGLPI {
                         ".__("Actions")."
                      </button>";
 
-               echo "<div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow mt-2' aria-labelledby='single-action'>";
+               echo "<div class='dropdown-menu dropdown-menu-end dropdown-menu-arrow mt-2' aria-labelledby='single-action'>";
                foreach ($actions as $key => $action) {
                   echo "<a class='dropdown-item' data-action='$key' href='#'>$action</a>";
                }
@@ -1117,7 +1117,7 @@ class CommonGLPI {
          }
 
          if ($current !== false) {
-            echo "<span class='m-1 ml-3'>" . ($current + 1) . "/" . count($glpilistitems) . "</span>";
+            echo "<span class='m-1 ms-3'>" . ($current + 1) . "/" . count($glpilistitems) . "</span>";
          }
 
          if ($next >= 0) {
